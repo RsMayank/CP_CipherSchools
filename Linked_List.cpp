@@ -63,12 +63,26 @@ node* searchNode(node* head, int n)
     }
     return notFound;
 }
-
-/* void DeleteNode(node* &head, int n)
+void DeleteNode(node* &head, int n)
 {
-    searchNode(head, n);
+    node* temp = head->next;
+    node* prev = head;
+    while(temp->next != 0)
+    {
+        if(temp->data == n)
+        {
+            //node* tempDel = prev;
+            prev->next = temp->next;
+            return;
+        }
+        temp = temp->next;
+        prev = prev->next;
+    }
+    cout<<"Node Doesn't Exist: "<<endl;
+
+    return;
 }
-*/
+
 
 
 /*node* printList(node* n)
@@ -94,15 +108,23 @@ int main()
     for(int i = 0 ; i < size ; i++)
     {
         int val;
+        cout<<"Entering Element of Node: "<<i<<endl;
         cin>>val;
         insertAtTail(head,val);
     }
+    cout<<"Enter the node you want to delete: "<<endl;
+    int nodeDel;
+    cin>>nodeDel;
     cout<<"enter the node you want to search: "<<endl;
     int NodeToBeSearch;
     cin>>NodeToBeSearch;
     node* res  = searchNode(head,NodeToBeSearch);
-    cout<<res->data<<endl;
-
+    if(res!=0)
+        cout<<"Element Found"<<endl;
+    cout<<"Linked List Before Deletion: "<<endl;
+    printList(head);
+    DeleteNode(head, nodeDel);
+    cout<<"Linked List Ater Delettion of Node "<<endl;
     printList(head);
 
     return 0;
